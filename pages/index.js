@@ -33,10 +33,28 @@ export default function Home(props) {
 // then execute the function component and it will render with the required data
 export async function getStaticProps() { //gets data fetching for prerendering during the build process
   // this code here will never execute on the client side only in the server side or build process side
-  // fetch data from an api or database // read data from a fyle system
+  // fetch data from an api or database // read data from a fyle system // the data will be cahched by cdn and reused 
   return {
     props: {
       meetups: DUMMY_MEETUPS,
-    }
+    },
+    revalidate: 1 //incremental static generation, 
+    // it represent the # of seconds that next will wait until regenerate the page for an incoming request on the server
+    // depends of the data update frequency, this will occasionally re-pre.-render on the server after deployment, so you dont have to do it manually
   }
 }
+
+// if you want to regenerate this page for every request, when the data changes frequently, to pre-generate dynamically the page after deployment on the server
+/* export async function getServerSideProps(context) { 
+  // this will no run during build process, but on the server side after deployment
+  // fetch data from an API // also to perform operations that use credentials that shoudnt be exposed to users
+  // gives request and response in the middleware 
+  const req = context.req; // helpful for authentication, some session cockie, gives you acces to incoming request and all its headers and the request body 
+  // gives you extra data
+  const res = context.res;
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS
+    }
+  }
+} */
