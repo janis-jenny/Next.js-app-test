@@ -11,7 +11,8 @@ function MeetUpDetails() {
     )
 }
 
-// only use it when the page component is a dynamic route and when you use getStaticProps only
+// only use it when the page component is a dynamic pages and when you use getStaticProps only,
+// it tells next fromthis dynamic parameter values should be pre generated
 export async function getStaticPaths() {
     return {
         fallback: false, // tells if my paths array contains all supported parameter(id) values (false) or just some of them
