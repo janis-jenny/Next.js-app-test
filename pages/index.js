@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+import Head from 'next/head';
 import { MongoClient } from 'mongodb'; // if is used in getStaticProps will no executed in client side bundle, for bundle size & security
 import MeetupList from '../components/meetups/MeetupList';
 
@@ -6,7 +8,15 @@ import MeetupList from '../components/meetups/MeetupList';
 // and returns that as the prerender html page content, we need to tell next when we are done waiting of the fetch data
 export default function Home(props) {
   return (
-    <MeetupList meetups={props.meetups}/>   
+    <Fragment>
+      <Head>
+        <title>React Meetups</title>
+        <meta 
+          name='description'
+          content='Browse a list of meet ups!'/>
+      </Head>
+      <MeetupList meetups={props.meetups} />  
+    </Fragment>
   )
 }
 // if we wanna pre render a page with data, next offers 1 ways of prerendering for controlling how the page should be render:

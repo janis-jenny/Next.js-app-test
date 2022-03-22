@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+import Head from 'next/head';
 import NewMeetupForm from "../../components/meetups/NewMeetUpForm";
 import { useRouter } from 'next/router';
 // my-domain.com/new-meetup
@@ -17,7 +19,17 @@ function NewMeetUpPage() {
         console.log(data);
         router.push('/') //replace is for not get back w the back btn
     }
-    return <NewMeetupForm onAddMeetup={addMeetUpHandler} /> 
+    return (
+        <Fragment>
+          <Head>
+            <title>React Meetups</title>
+            <meta 
+              name='description'
+              content='Add your own meetups and create an amazing networking'/>
+          </Head>
+          <NewMeetupForm onAddMeetup={addMeetUpHandler} />  
+        </Fragment>
+      )
     // No () here cause it is gonna be execurted in props function at NewMeetupForm when user submit the form
 }
 
