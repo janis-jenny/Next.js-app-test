@@ -8,9 +8,9 @@ function MyApp({ Component, pageProps }) {
               <Component {...pageProps} />
             </Layout>
           ) // Component is a prop that hold the page content that should be rendered,
-  // so it will be different whenerver we switched the page
+  // so it will be different whenever we switched the page
   // pageProps are specific props that pages might be getting
-  // Component will be the actual page content of our different pages and it wil change when you navigate to page a or b
+  // Component will be the actual page content of our different pages and it will change when you navigate to page a or b
 }
 
 export default MyApp;

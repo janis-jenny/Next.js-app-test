@@ -8,7 +8,7 @@ function NewMeetUpPage() {
     const router = useRouter();
     async function addMeetUpHandler(enteredData) {
         // insert the url to we want to send a request, here is the internal api that is hosted 
-        //by the same server as being use for serving the page, this will trigger the handler from the api w this path
+        // by the same server as being use for serving the page, this will trigger the handler from the api w this path
         // send a POST request w the 2nd argument
         const response = await fetch('/api/new-meetup', {
             method: 'POST',
@@ -19,6 +19,7 @@ function NewMeetUpPage() {
         console.log(data);
         router.push('/') //replace is for not get back w the back btn
     }
+    
     return (
         <Fragment>
           <Head>
@@ -29,7 +30,7 @@ function NewMeetUpPage() {
           </Head>
           <NewMeetupForm onAddMeetup={addMeetUpHandler} />  
         </Fragment>
-      )
+    )
     // No () here cause it is gonna be execurted in props function at NewMeetupForm when user submit the form
 }
 

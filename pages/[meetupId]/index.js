@@ -43,10 +43,9 @@ export async function getStaticPaths() {
         // allows you to pregenerate some of ur pages for specific id values like the most pospular ones
         // and pregenerate the missing ones dynamically when request are coming in
           //paths:holds key value pairs that lead to dynamic pages even for dynamic segments
-          paths: meetups.map(meetup => ({
-            params: {meetupId: meetup._id.toString()} //this generate the array of paths dynamically
-          }))
-        
+        paths: meetups.map(meetup => ({
+        params: {meetupId: meetup._id.toString()} //this generate the array of paths dynamically
+        }))
     }
 
 }
