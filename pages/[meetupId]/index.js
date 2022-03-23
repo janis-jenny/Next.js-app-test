@@ -37,11 +37,15 @@ export async function getStaticPaths() {
     client.close();
 
     return {
-        fallback: false, // tells if my paths array contains all supported parameter(id) values (false) or just some of them
+        fallback: 'blocking', // tells if my paths array contains all supported parameter(id) values (false) or just some of them
         // if the user try acces to m3 they will get a 404 error when is false,
-        // if is true next will try to generate a page for the m3 meetup dynamically on the server
+        // if is true or 'blocking' next will try to generate a page for the m3 meetup dynamically on the server
         // allows you to pregenerate some of ur pages for specific id values like the most pospular ones
-        // and pregenerate the missing ones dynamically when request are coming in
+        // and pregenerate the missing ones dynamically when request are coming in,
+        // the list of paths specifying here might not be exhaustive there might be more valid pages, and then next will no respond w 404,
+        // if it can't find the page inmedietly, it will pregenerate them when need it
+        // true: it will return an empty page & then pull down the dynamically generate it content once that's done so u need to handle that cause
+        // 'bolocking': the user will no see anything until the page was pre generated & the finished page will be served
           //paths:holds key value pairs that lead to dynamic pages even for dynamic segments
         paths: meetups.map(meetup => ({
         params: {meetupId: meetup._id.toString()} //this generate the array of paths dynamically
