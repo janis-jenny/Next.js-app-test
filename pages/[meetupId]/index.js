@@ -83,3 +83,8 @@ export async function getStaticProps(context) {
 }
 
 export default MeetUpDetails;
+
+// Notes from Udemy course:
+// Catch-all routes:
+// [..slugs] -> to support other routes for loading a single page
+// console.log(router) -> {slug: ["2020", "20"]} -> http:www.my-domain.com/posts/2020/20

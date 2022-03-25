@@ -9,7 +9,7 @@ function MeetupItem(props) {
   function showDetailsHandler() { // handler to navigate programatically
     // router.query -> query is a property that give access to all the data of the url for a dynamic page 
     // for navigating programatically there is a push method from useRouter, that pushes a new page onto the stack of pages
-    // it's the equicalent of using the Link component
+    // it's the equivalent of using the Link component //you can also pass an object w pathName and query object to navigate like Links
     router.push('/' + props.id); // add dynamic path
   }
 
