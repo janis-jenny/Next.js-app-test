@@ -41,7 +41,7 @@ export async function getStaticProps() { // gets data fetching for prerendering 
   const meetupsCollections = db.collection('meetups');
   const meetups = await meetupsCollections.find().toArray() // find all documents inside collection
 
-  if (meetups.length ===0) {
+  if (meetups.length === 0) {
     return { noFound: true }; // we will show no found page 404 when there is no data cuase you fail to fetch data
   }
 
@@ -68,26 +68,29 @@ export async function getStaticProps() { // gets data fetching for prerendering 
     // if the data changes frequently, after the page was deploy then need to rebuild and redeploy again, with ISG 
     // you generate statically a page at build time and it's continuously updatinng even after deployment without redeploying
     // so regenerate it on every request at most every X seconds, so you have ongoing prerendering on the server for incoming request
-    
   }
 }
 
-// if you want to regenerate this page for every request, when the data changes frequently, to pre-generate dynamically the page after deployment on the server
+// if you want to regenerate this page for every request, when the data changes frequently,
 /* export async function getServerSideProps(context) { 
-  // this will no run during build process, but on the server side after deployment
+  // this will no pregenerated during build, but this code will run on the server side after deployment for every incoming request
   // fetch data from an API // also to perform operations that use credentials that shoudnt be exposed to users
   // gives request and response in the middleware 
-  const req = context.req; // helpful for authentication, some session cockie, gives you acces to incoming request and all its headers and the request body 
-  // gives you extra data
-  const res = context.res;
+  const req = context.req;  // helpful for authentication, to read cockie data attached to em, gives you acces to incoming request and all its headers and the request body 
+  // gives you extra data   // you can read incoming data from there
+  const res = context.res;  // you can manipulate the response as needed to send back a response by adding extra headers or cookies etc
   return {
     props: {
       meetups: DUMMY_MEETUPS
     }
   }
-} */
+} */ 
+// we cant prereder this page cause we dont know which user will have in advance & we dont get access to their cookies either
 
 // Notes from Udemy course:
 // when you click on a Link, we're not sending a new request to the server & load the prerender html file,
 // instead we stay in this single page/ react application, which was loaded and hydrate after this initial request
 // It will render a new page for us but the data is coming from prefetch json file, the data is already there when we navigate
+// the difference is the kind of data you get access to in this context and the timing
+// when working w dynamic pages, you don't need to call getStaticPaths, cause dosnt and no need topregenerate the page at all in advance, 
+// but you can extract the concrete value of the dynamic path/url with params from context

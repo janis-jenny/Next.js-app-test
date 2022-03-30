@@ -5,6 +5,18 @@ import '../styles/globals.css'
 function MyApp({ Component, pageProps }) {
   return (
             <Layout>
+              <Head>
+                <title>React Meetups</title>
+                <meta
+                  name='description'
+                  content='Meetup Events'
+                />
+                <meta
+                  name='viewport'
+                  content='initial-scale=1.0, width=device-width'
+                /> 
+                {/* ensures the page is responsive and scales correctly in all the pages */}
+              </Head>
               <Component {...pageProps} />
             </Layout>
           ) // Component is a prop that hold the page content that should be rendered,
